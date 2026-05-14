@@ -1,18 +1,18 @@
-# student_manager.py
+# student_management.py
 
 class StudentManager:
     def __init__(self):
         self.students = {}
 
     def add_student(self, name, marks):
-        """Add a student with marks and calculated grade."""
+        """Add student with marks and grade."""
         self.students[name] = {
             "marks": marks,
             "grade": self.get_grade(marks)
         }
 
     def get_grade(self, marks):
-        """Return grade based on marks."""
+        """Calculate grade based on marks."""
         if marks >= 90:
             return "A"
         elif marks >= 75:
@@ -23,20 +23,34 @@ class StudentManager:
             return "F"
 
     def show_all(self):
-        """Display all students."""
+        """Display all student records."""
         if not self.students:
-            print("No students found.")
+            print("\nNo student records found.")
             return
 
-        print("Student Records:")
+        print("\nStudent Records:")
+        print("-" * 30)
+
         for name, data in self.students.items():
-            print(f"- {name}: {data['marks']} marks (Grade {data['grade']})")
+            print(f"Name  : {name}")
+            print(f"Marks : {data['marks']}")
+            print(f"Grade : {data['grade']}")
+            print("-" * 30)
 
 
 # Main Program
 manager = StudentManager()
 
-manager.add_student("Alice", 92)
-manager.add_student("Bob", 78)
+# Taking user input
+num = int(input("Enter number of students: "))
 
+for i in range(num):
+    print(f"\nEnter details for Student {i + 1}")
+
+    name = input("Enter student name: ")
+    marks = float(input("Enter student marks: "))
+
+    manager.add_student(name, marks)
+
+# Display all students
 manager.show_all()
